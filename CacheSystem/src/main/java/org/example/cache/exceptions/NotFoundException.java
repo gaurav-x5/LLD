@@ -1,0 +1,4 @@
+package org.example.cache.exceptions;
+
+public class NotFoundException extends RuntimeException {
+}
