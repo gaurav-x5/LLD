@@ -1,0 +1,28 @@
+package org.example.api;
+
+import lombok.AllArgsConstructor;
+import lombok.NonNull;
+import org.example.model.Screen;
+import org.example.model.Seat;
+import org.example.model.Theatre;
+import org.example.service.TheatreService;
+
+@AllArgsConstructor
+public class TheatreController {
+    final private TheatreService theatreService;
+
+    public Theatre createTheatre(@NonNull final String theatreName) {
+        return theatreService.createTheatre(theatreName);
+    }
+
+    public String createScreenInTheatre(@NonNull final String screenName, @NonNull final String theatreId) {
+        final Theatre theatre = theatreService.getTheatre(theatreId);
+        return theatreService.createScreenInTheatre(screenName, theatre).getId();
+    }
+
+    public String createSeatInScreen(@NonNull final Integer rowNo, @NonNull final Integer seatNo,
+                                   @NonNull final String screenId) {
+        final Screen screen = theatreService.getScreen(screenId);
+        return theatreService.createSeatInTheatre(rowNo, seatNo, screen).getId();
+    }
+}
